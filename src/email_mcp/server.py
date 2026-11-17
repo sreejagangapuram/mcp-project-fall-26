@@ -60,7 +60,9 @@ def search_emails(
         raise ToolError("Search query must contain at least one word.")
     return store.search(query, limit)
 
-
+# registering function as MCP tool
+# makes function available to an ai client 
+# ai can call get_email to retrieve an email
 @mcp.tool()
 def get_email(id: int) -> Email:
     """Get one email in full by the id that search_emails returned."""
@@ -69,12 +71,19 @@ def get_email(id: int) -> Email:
     # ToolError when it cannot answer, and returns what the store gives it.
     # Hint 1: store.get(id) returns the email, or None when no email has
     #         that id.
+    
+    # store is collection of emails managed by ListStore 
+    #.get(id) - searches for email with that ID
+    email = store.get(id)
     # Hint 2: if there is no email, raise
     #         ToolError(f"No email found for ID {id}.")
     #         Use that exact message; the tests check it.
+    # is None - not found 
+    if email is None: 
+        raise ToolError(f"No email found for ID {id}.")
+    
     # Hint 3: otherwise, return the email.
-    raise NotImplementedError("TODO 2: fill in get_email in server.py")
-
+    return email
 
 if __name__ == "__main__":
     # stdout (standard output) carries MCP messages. Send diagnostic logs to
