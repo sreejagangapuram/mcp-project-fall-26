@@ -21,7 +21,7 @@ def count_letter(text: str, letter: str) -> int:
     #         message instead of crashing the server. Use that exact
     #         message; the tests check it.
     if len(letter) != 1: 
-        raise ToolError("letter must be exactly one character")
+        raise ToolError("letter must be exactly one character.")
     
     # Hint 2: ignore case by lowercasing both `text` and `letter`.
     text = text.lower()
