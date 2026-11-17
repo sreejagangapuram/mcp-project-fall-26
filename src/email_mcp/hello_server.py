@@ -20,10 +20,16 @@ def count_letter(text: str, letter: str) -> int:
     #         A ToolError is sent back to the model as a readable error
     #         message instead of crashing the server. Use that exact
     #         message; the tests check it.
+    if len(letter) != 1: 
+        raise ToolError("letter must be exactly one character")
+    
     # Hint 2: ignore case by lowercasing both `text` and `letter`.
-    # Hint 3: Python strings have a .count() method.
-    raise NotImplementedError("TODO 1: fill in count_letter in hello_server.py")
+    text = text.lower()
+    letter = letter.lower() 
 
+    # Hint 3: Python strings have a .count() method.
+    # counts how many times the letter appears in the text
+    return text.count(letter)
 
 if __name__ == "__main__":
     # stdout (standard output) carries MCP messages. Send diagnostic logs to
